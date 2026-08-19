@@ -1,0 +1,84 @@
+import java.io.*;
+
+class Student
+{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int rollNo;
+    String name;
+    int marks1, marks2, marks3;
+
+    void acceptDetails() throws IOException
+    {
+        System.out.print("Enter Roll No: ");
+        rollNo = Integer.parseInt(br.readLine());
+
+        System.out.print("Enter Name: ");
+        name = br.readLine();
+
+        System.out.print("Enter marks 1: ");
+        marks1 = Integer.parseInt(br.readLine());
+
+        System.out.print("Enter marks 2: ");
+        marks2 = Integer.parseInt(br.readLine());
+
+        System.out.print("Enter marks 3: ");
+        marks3 = Integer.parseInt(br.readLine());
+    }
+
+    int calculateTotal()
+    {
+        return marks1 + marks2 + marks3;
+    }
+
+    double calculatePercentage()
+    {
+        return calculateTotal() / 3.0;
+    }
+
+    String calculateGrade()
+    {
+        double percentage = calculatePercentage();
+
+        if (percentage >= 90)
+            return "A+";
+        else if (percentage >= 80)
+            return "A";
+        else if (percentage >= 70)
+            return "B";
+        else if (percentage >= 60)
+            return "C";
+        else if (percentage >= 50)
+            return "D";
+        else
+            return "F";
+    }
+
+    void displayResult()
+    {
+        System.out.println("\n Student Result ");
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Name: " + name);
+        System.out.println("Total Marks: " + calculateTotal());
+        System.out.println("Percentage: " + calculatePercentage());
+        System.out.println("Grade: " + calculateGrade());
+    }
+}
+
+ class Main
+{
+    public static void main(String[] args) throws IOException
+    {
+        Student s1 = new Student();
+        Student s2 = new Student();
+
+        System.out.println("Enter details of Student 1:");
+        s1.acceptDetails();
+
+        System.out.println("\nEnter details of Student 2:");
+        s2.acceptDetails();
+
+        s1.displayResult();
+        s2.displayResult();
+    }
+}
