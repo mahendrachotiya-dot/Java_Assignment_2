@@ -1,0 +1,89 @@
+import java.io.*;
+
+class BankAccount
+{
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int accountNumber;
+    String accountHolderName;
+    int balance;
+
+    BankAccount()
+    {
+        accountNumber = 0;
+        accountHolderName = "Unknown";
+        balance = 0;
+    }
+
+    BankAccount(int accountNumber, String accountHolderName, int balance)
+    {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = balance;
+    }
+
+    void deposit() throws IOException
+    {
+        System.out.print("Enter amount to deposit: ");
+        int amount = Integer.parseInt(br.readLine());
+
+        balance = balance + amount;
+
+        System.out.println("Amount deposited successfully.");
+    }
+
+    void withdraw() throws IOException
+    {
+        System.out.print("Enter amount to withdraw: ");
+        int amount = Integer.parseInt(br.readLine());
+
+        if (amount <= balance)
+        {
+            balance = balance - amount;
+            System.out.println("Amount withdrawn successfully.");
+        }
+        else
+        {
+            System.out.println("Insufficient balance.");
+        }
+    }
+
+    void displayAccount()
+    {
+        System.out.println(" Account Details ");
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolderName);
+        System.out.println("Balance: " + balance);
+    }
+}
+
+class Main
+{
+    public static void main(String[] args) throws IOException
+    {
+        BankAccount a1 = new BankAccount();
+
+        System.out.println("Enter details for Account 1:");
+
+        System.out.print("Enter Account Number: ");
+        a1.accountNumber = Integer.parseInt(a1.br.readLine());
+
+        System.out.print("Enter Account Holder Name: ");
+        a1.accountHolderName = a1.br.readLine();
+
+        System.out.print("Enter Balance: ");
+        a1.balance = Integer.parseInt(a1.br.readLine());
+
+        a1.deposit();
+        a1.withdraw();
+        a1.displayAccount();
+
+        BankAccount a2 = new BankAccount(102, "Rahul", 25000);
+
+        System.out.println("Account 2 created using parameterized constructor.");
+
+        a2.deposit();
+        a2.withdraw();
+        a2.displayAccount();
+    }
+}
