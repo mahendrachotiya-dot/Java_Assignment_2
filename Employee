@@ -1,0 +1,78 @@
+abstract class Employee{
+    int employeeId;
+    String employeeName;
+    double basicSalary;
+
+    Employee(int id, String name , double salary){
+        employeeId = id;
+        employeeName = name;
+        basicSalary = salary;
+    }
+
+    abstract double calculateSalary();
+}
+
+
+
+class PermanentEmployee extends Employee{
+    PermanentEmployee(int id, String name , double salary){
+        super(id,name,salary);
+    }
+
+    public double calculateSalary(){
+        double HRA = 0.2*basicSalary;
+        double DA = 0.4*basicSalary;
+        double PF = 0.12*basicSalary;
+        double Gross_Salary = basicSalary+HRA+DA;
+        double netSalary = Gross_Salary-PF;
+
+        return netSalary;
+    }
+
+    public void displayDetails(){
+        System.out.println("Employee Id: "+employeeId);
+        System.out.println("Employee Name: "+employeeName);
+        System.out.println("Employee Salary: "+basicSalary);
+
+        System.out.println("Net Salary:"+calculateSalary());
+    }
+}
+
+class contractEmployee extends Employee{
+
+    contractEmployee(int id, String name , double salary){
+        super(id,name,salary);
+    }
+
+    public double calculateSalary(){
+        double allowance = 0.1*basicSalary;
+        double grossSalary = basicSalary+allowance;
+
+        return grossSalary;
+    }
+
+    public void displayDetails(){
+        System.out.println("Employee Id: "+employeeId);
+        System.out.println("Employee Name: "+employeeName);
+        System.out.println("Employee Salary: "+basicSalary);
+
+        System.out.println("Gross Salary:"+calculateSalary());
+    }
+}
+ class Main {
+    public static void main(String[] args) {
+
+        /*PermanentEmployee obj = new PermanentEmployee(10,"Ram",70000);
+        contractEmployee obj2 = new contractEmployee(11,"Mahendra",89000);
+
+        obj.displayDetails();
+        obj2.displayDetails();*/
+
+        Employee e = new PermanentEmployee(10,"Mahendra",9000);
+        System.out.println(e.calculateSalary());
+
+        Employee e2 = new contractEmployee(11,"Dinesh",1100);
+        System.out.println(e2.calculateSalary());
+
+    }
+}
